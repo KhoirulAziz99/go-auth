@@ -1,7 +1,6 @@
 package authentication
 
 import (
-
 	"fmt"
 	"net/http"
 	"time"
@@ -9,6 +8,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )
+
 var jwtKey = "Sangat_rahasia"
 
 type User struct {
@@ -16,7 +16,6 @@ type User struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
-
 
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -42,8 +41,7 @@ func AuthMiddleware() gin.HandlerFunc {
 	}
 }
 
-
-func loginHandler(c *gin.Context) {
+func LoginHandler(c *gin.Context) {
 	var user User
 
 	if err := c.ShouldBind(&user); err != nil {
@@ -73,7 +71,7 @@ func loginHandler(c *gin.Context) {
 	}
 }
 
-func profileHandler(c *gin.Context) {
+func ProfileHandler(c *gin.Context) {
 	// Ambil username dari JWT token
 	claims := c.MustGet("claims").(jwt.MapClaims)
 	username := claims["username"].(string)
